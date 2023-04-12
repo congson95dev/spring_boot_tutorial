@@ -1,12 +1,13 @@
 package com.example.tutorial.models;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.util.Calendar;
+
+import javax.persistence.*;
 
 // @NoArgsConstructor used to automatic create an empty contstructor
 // @AllArgsConstructor used to automatic create an full params constructor

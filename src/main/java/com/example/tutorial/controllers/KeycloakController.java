@@ -4,7 +4,6 @@ import com.example.tutorial.models.KeyCloakUser;
 import com.example.tutorial.models.Product;
 import com.example.tutorial.models.ResponseObject;
 import com.example.tutorial.utils.KeycloakUtils;
-import jakarta.servlet.http.HttpServletRequest;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
@@ -38,7 +37,7 @@ public class KeycloakController {
 
     @GetMapping("/users")
     ResponseEntity<ResponseObject> getAllUsers(
-            @RequestParam(required=false) String username,
+            @RequestParam(required = false) String username,
             Pageable pageable
     ) {
         KeycloakUtils keycloakUtils = new KeycloakUtils(env);
