@@ -1,0 +1,10 @@
+{
+  "realm": "spring_boot_tutorial",
+  "auth-server-url": "http://0.0.0.0:8083/",
+  "ssl-required": "none",
+  "resource": "spring_boot_tutorial",
+  "credentials": {
+    "secret": "TXkNefUiBStJtdSTeAP74266tMLUneXU"
+  },
+  "confidential-port": 0
+}

@@ -15,8 +15,33 @@
 	<description>Tutorial project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-security.version>5.6.1</spring-security.version>
+		<spring.version>5.3.9</spring.version>
 	</properties>
 	<dependencies>
+		<!-- Spring Security dependencies -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Other dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -64,12 +89,12 @@
 			<groupId>org.keycloak</groupId>
 			<artifactId>keycloak-spring-boot-starter</artifactId>
 			<version>16.1.0</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.keycloak</groupId>
-					<artifactId>keycloak-spring-boot-2-adapter</artifactId>
-				</exclusion>
-			</exclusions>
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					<groupId>org.keycloak</groupId>-->
+<!--					<artifactId>keycloak-spring-boot-2-adapter</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
 		</dependency>
 		<dependency>
 			<groupId>org.keycloak</groupId>

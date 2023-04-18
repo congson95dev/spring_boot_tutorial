@@ -8,6 +8,7 @@ keycloak:
   bearer-only: true
   cors: true
   principal-attribute: preferred_username
+#  config-file: keycloak.json
 keycloak-client:
   client-id: spring_boot_tutorial_client
   client-secret: TXkNefUiBStJtdSTeAP74266tMLUneXU
