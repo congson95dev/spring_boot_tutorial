@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+// When we extends from JpaRepository, we'll have every function it have, such as paging, crud, flush ..
+
 // @Repository will lets spring boot know that this class is repository
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
