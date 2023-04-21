@@ -15,6 +15,7 @@ import java.util.Calendar;
 // @AllArgsConstructor used to automatic create an full params constructor
 // @Data used to automatic create get, set, hash, equals functions
 // @Id used to define the field will be primary key of the table
+// @Document used to set the table name, it's only support for mongodb
 
 @NoArgsConstructor
 @AllArgsConstructor
