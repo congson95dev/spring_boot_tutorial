@@ -20,7 +20,7 @@ public class ProductController {
 
     // @PathVariable is to get the params
     @GetMapping("/{id}")
-    ResponseEntity<ResponseObject> getProductDetail(@PathVariable Long id) {
+    ResponseEntity<ResponseObject> getProductDetail(@PathVariable String id) {
         return productService.getProductDetail(id);
     }
 
@@ -32,12 +32,12 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<ResponseObject> updateProduct(@RequestBody Product newProduct, @PathVariable Long id) {
+    ResponseEntity<ResponseObject> updateProduct(@RequestBody Product newProduct, @PathVariable String id) {
         return productService.updateProduct(newProduct, id);
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<ResponseObject> deleteProduct(@PathVariable Long id) {
+    ResponseEntity<ResponseObject> deleteProduct(@PathVariable String id) {
         return productService.deleteProduct(id);
     }
 }

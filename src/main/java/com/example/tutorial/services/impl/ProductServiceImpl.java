@@ -5,6 +5,7 @@ import com.example.tutorial.models.ResponseObject;
 import com.example.tutorial.repositories.ProductRepository;
 import com.example.tutorial.services.ProductService;
 import lombok.AllArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
                 );
     }
 
-    public ResponseEntity<ResponseObject> getProductDetail(@PathVariable Long id) {
+    public ResponseEntity<ResponseObject> getProductDetail(@PathVariable String id) {
         // Optional is used because the response maybe null
         Optional<Product> product = repository.findById(id);
         return (product.isPresent()) ?
@@ -61,38 +62,41 @@ public class ProductServiceImpl implements ProductService {
         }
         // insert to db
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                new ResponseObject(STATUS_OK, "Created Successfully", repository.save(product))
+                new ResponseObject(STATUS_OK, "Created Successfully", repository.insert(product))
         );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseObject> updateProduct(@RequestBody Product newProduct, @PathVariable Long id) {
+    public ResponseEntity<ResponseObject> updateProduct(@RequestBody Product product, @PathVariable String id) {
         // check if product name is already exist in db
-        boolean checkIfProductNameExist = this.checkIfProductNameExist(newProduct);
+        boolean checkIfProductNameExist = this.checkIfProductNameExist(product);
         if (checkIfProductNameExist) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                     new ResponseObject(STATUS_FAILED, "This product name is already taken", "")
             );
         }
 
-        // find product
-        // if exists, update product data, otherwise, create new product
+        // check if exists
         Product updatedProduct = repository.findById(id)
-                .map(product -> {
-                    product.setProductName(newProduct.getProductName());
-                    product.setProductYear(newProduct.getProductYear());
-                    product.setProductPrice(newProduct.getProductPrice());
-                    product.setProductUrl(newProduct.getProductUrl());
-                    return repository.save(product);
-                }).orElseGet(() -> {
-                    return repository.save(newProduct);
-                });
+                .orElseThrow(() -> new RuntimeException(
+                        String.format("Can't find product with id %s", id)
+                ));
+
+        // update data
+        updatedProduct.setProductName(product.getProductName());
+        updatedProduct.setProductYear(product.getProductYear());
+        updatedProduct.setProductPrice(product.getProductPrice());
+        updatedProduct.setProductUrl(product.getProductUrl());
+
+        // save to db
+        repository.save(updatedProduct);
+
         return ResponseEntity.status(HttpStatus.OK).body(
                 new ResponseObject(STATUS_OK, "Updated Successfully", updatedProduct)
         );
     }
 
-    public ResponseEntity<ResponseObject> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<ResponseObject> deleteProduct(@PathVariable String id) {
         boolean productExist = repository.existsById(id);
         if (productExist) {
             repository.deleteById(id);

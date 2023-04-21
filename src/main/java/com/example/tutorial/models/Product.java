@@ -3,7 +3,10 @@ package com.example.tutorial.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -11,26 +14,24 @@ import java.util.Calendar;
 // @NoArgsConstructor used to automatic create an empty contstructor
 // @AllArgsConstructor used to automatic create an full params constructor
 // @Data used to automatic create get, set, hash, equals functions
-// @Entity used so spring boot know this is an entity and add it to db
-// @Table used to define name of the table
 // @Id used to define the field will be primary key of the table
-// @GeneratedValue(strategy = GenerationType.AUTO) used to set the field to auto increment
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
-@Table(name="tblProduct")
+@Document("product")
 public class Product {
+    // in this mongo db, it don't using int or long for id as sql, it using string
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @NonNull
-    @Column(nullable = false, unique = true, length = 255)
+    private String id;
+    @Field(name="name")
+    @Indexed(unique = true)
     private String productName;
+    @Field(name="year")
     private int productYear;
+    @Field(name="price")
     private Double productPrice;
+    @Field(name="url")
     private String productUrl;
 
     // calculated field (transient)

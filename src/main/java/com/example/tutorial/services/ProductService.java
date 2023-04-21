@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface ProductService {
     ResponseEntity<ResponseObject> getAllProducts();
-    ResponseEntity<ResponseObject> getProductDetail(@PathVariable Long id);
+    ResponseEntity<ResponseObject> getProductDetail(@PathVariable String id);
     ResponseEntity<ResponseObject> insertProduct(@RequestBody Product product);
-    ResponseEntity<ResponseObject> updateProduct(@RequestBody Product newProduct, @PathVariable Long id);
-    ResponseEntity<ResponseObject> deleteProduct(@PathVariable Long id);
+    ResponseEntity<ResponseObject> updateProduct(@RequestBody Product newProduct, @PathVariable String id);
+    ResponseEntity<ResponseObject> deleteProduct(@PathVariable String id);
 }
